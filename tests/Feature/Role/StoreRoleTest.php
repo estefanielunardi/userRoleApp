@@ -8,11 +8,24 @@ use Tests\TestCase;
 
 class StoreRoleTest extends TestCase
 {
-    public function test_route_store_a_role()
+    public function test_store_route()
     {
-        $response = $this->get('/role');
+        $response = $this->get('/roles');
 
         $response->assertStatus(200);
     }
 
+    public function test_a_role_can_be_store()
+    {
+        $this->withoutExceptionHandling();
+
+        $role = [
+            'name' => 'Admin'
+        ];
+
+        $response = $this->postJson('/roles' , $role);
+
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('roles', $role);
+    }
 }
