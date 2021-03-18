@@ -23,7 +23,7 @@ class StoreRoleTest extends TestCase
             'name' => 'Admin'
         ];
 
-        $response = $this->postJson('/roles' , $role);
+        $response = $this->post('/roles' , $role);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('roles', $role);
