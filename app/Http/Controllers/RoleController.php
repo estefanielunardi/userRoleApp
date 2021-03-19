@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -57,6 +58,10 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        //
+        DB::table('roles')
+        ->where('id', $id)
+        ->delete();
+        
+        return back();
     }
 }
