@@ -5,9 +5,12 @@ namespace Tests\Feature\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Role;
 
 class StoreRoleTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function test_store_route()
     {
         $response = $this->get('/roles');
@@ -20,7 +23,7 @@ class StoreRoleTest extends TestCase
         $this->withoutExceptionHandling();
 
         $role = [
-            'name' => 'Admin'
+            'title' => 'Admin',
         ];
 
         $response = $this->post('/roles' , $role);
