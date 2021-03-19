@@ -22,7 +22,7 @@ class DeleteRoleTest extends TestCase
 
         $response = $this->delete('/roles/1');
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/roles', $role);
         $this->assertDatabaseCount('roles', 0);
         $this->assertDatabaseMissing('roles', $role);
     }

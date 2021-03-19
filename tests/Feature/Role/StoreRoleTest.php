@@ -10,13 +10,6 @@ use App\Models\Role;
 class StoreRoleTest extends TestCase
 {
     use RefreshDatabase;
-    
-    public function test_store_route()
-    {
-        $response = $this->get('/roles');
-
-        $response->assertStatus(200);
-    }
 
     public function test_a_role_can_be_store()
     {
@@ -28,7 +21,8 @@ class StoreRoleTest extends TestCase
 
         $response = $this->post('/roles' , $role);
 
-        $response->assertStatus(201);
+        $response->assertStatus(302)
+                ->assertRedirect('/roles', $role);;
         $this->assertDatabaseHas('roles', $role);
     }
 }

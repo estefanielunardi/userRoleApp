@@ -27,7 +27,8 @@ class UpdateRoleTest extends TestCase
 
         $response = $this->put('/roles/1', $roleUpdated);
 
-        $response->assertStatus(302);
+        $response->assertStatus(302)
+                ->assertRedirect('/roles', $roleUpdated);;
 
         $this->assertDatabaseHas('roles', $roleUpdated);
     }

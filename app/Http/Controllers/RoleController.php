@@ -11,13 +11,14 @@ class RoleController extends Controller
    
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view('dashboard', compact('roles'));
     }
 
     
     public function create()
     {
-        //
+        return view('createRoleForm');
     }
 
  
@@ -29,13 +30,14 @@ class RoleController extends Controller
 
         $role->save();
 
-        return $role;
+        return redirect()->route('roles.index');
     }
 
    
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+        return view('rolePage', compact('role'));
     }
 
    
@@ -48,10 +50,9 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $role->title = $request->title;
-
         $role->save();
        
-        return back();
+        return redirect()->route('roles.index');
 
     }
 
@@ -62,6 +63,6 @@ class RoleController extends Controller
         ->where('id', $id)
         ->delete();
         
-        return back();
+        return redirect()->route('roles.index');
     }
 }
