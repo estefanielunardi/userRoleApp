@@ -5,6 +5,7 @@ namespace Tests\Feature\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Role;
 
 class UpdateRoleTest extends TestCase
 {
@@ -15,18 +16,18 @@ class UpdateRoleTest extends TestCase
         $this->withoutExceptionHandling();
         
         $role =[ 
-            'name'=>'Admin'
+            'title'=>'Admin'
         ];
 
-        $this->post('/roles',$role);
+        $this->post('/roles', $role);
 
         $roleUpdated =[ 
-            'name'=>'User'
+            'title'=>'User'
         ];
 
         $response = $this->put('/roles/1', $roleUpdated);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
 
         $this->assertDatabaseHas('roles', $roleUpdated);
     }
