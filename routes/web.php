@@ -22,6 +22,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+Route::get('/role/create', function () {
+    return view('createRoleForm');
+})->middleware(['auth'])->name('createRole'); 
+
 require __DIR__.'/auth.php';
 
 
